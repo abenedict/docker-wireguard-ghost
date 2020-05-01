@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM lsiobase/ubuntu:bionic
 
 RUN apt-get update && \
     apt-get install -y software-properties-common debconf-utils iptables curl && \
@@ -8,5 +8,6 @@ RUN apt-get update && \
     apt-get install -y iproute2 wireguard-dkms wireguard-tools curl resolvconf
 
 COPY startup.sh /.
+COPY root/ /
 
-ENTRYPOINT ["/startup.sh"]
+ENTRYPOINT ["/init"]

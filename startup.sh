@@ -1,13 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
-wg-quick up wgnet0
+WG_NET=${1:-'wgnet0'}
 
-VPN_IP=$(grep -Po 'Endpoint\s=\s\K[^:]*' /etc/wireguard/wgnet0.conf)
+wg-quick up $WG_NET
+
+VPN_IP=$(grep -Po 'Endpoint\s=\s\K[^:]*' /etc/wireguard/$WG_NET.conf)
 
 function finish {
     echo "$(date): Shutting down vpn"
-    wg-quick down wgnet0
+    wg-quick down $WG_NET
 }
 
 # Our IP address should be the VPN endpoint for the duration of the

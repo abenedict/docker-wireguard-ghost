@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+WG_NET=${WG_NET:-'wgnet0'}
+
+exec \
+  /startup.sh $WG_NET
